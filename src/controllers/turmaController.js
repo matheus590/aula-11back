@@ -34,8 +34,8 @@ const getTurmasByCurso = async (req, res) => {
 
 const createTurma = async (req, res) => {
   try {
-    const { id_curso, ano_letivo, periodo } = req.body;
-    const novaTurma = await turmaModel.create(id_curso, ano_letivo, periodo);
+    const { nome_curso, identificador_turma, userId } = req.body;
+    const novaTurma = await turmaModel.create(nome_curso, identificador_turma, userId);
     return res.status(201).json(novaTurma);
   } catch (error) {
     return res.status(500).json({ error: "Erro ao criar turma", detalhe: error.message });
@@ -45,9 +45,9 @@ const createTurma = async (req, res) => {
 const updateTurma = async (req, res) => {
   try {
     const { id } = req.params;
-    const { id_curso, ano_letivo, periodo } = req.body;
+    const { nome_curso, identificador_turma, userId } = req.body;
     
-    const turmaAtualizada = await turmaModel.update(id, id_curso, ano_letivo, periodo);
+    const turmaAtualizada = await turmaModel.update(id, nome_curso, identificador_turma, userId);
     
     if (!turmaAtualizada) return res.status(404).json({ message: "Turma não encontrada para atualizar" });
     

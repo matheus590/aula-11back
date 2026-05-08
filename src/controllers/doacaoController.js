@@ -22,20 +22,20 @@ const getDoacaoById = async (req, res) => {
   }
 };
 
-const getDoacoesByAluno = async (req, res) => {
+const getDoacoesByCurso = async (req, res) => {
   try {
-    const { alunoId } = req.params;
-    const doacoes = await doacaoModel.getByAlunoId(alunoId);
+    const { cursoId } = req.params;
+    const doacoes = await doacaoModel.getByCursoId(cursoId);
     return res.status(200).json(doacoes);
   } catch (error) {
-    return res.status(500).json({ error: "Erro ao buscar doações deste aluno", detalhe: error.message });
+    return res.status(500).json({ error: "Erro ao buscar doações deste curso", detalhe: error.message });
   }
 };
 
 const createDoacao = async (req, res) => {
   try {
-    const { alunoId, valor, data } = req.body;
-    const novaDoacao = await doacaoModel.create(alunoId, valor, data);
+    const { qtd_leite, data_registro, id_turma, id_usuario } = req.body;
+    const novaDoacao = await doacaoModel.create(qtd_leite, data_registro, id_turma, id_usuario);
     return res.status(201).json(novaDoacao);
   } catch (error) {
     return res.status(500).json({ error: "Erro ao criar doação", detalhe: error.message });
@@ -45,9 +45,9 @@ const createDoacao = async (req, res) => {
 const updateDoacao = async (req, res) => {
   try {
     const { id } = req.params;
-    const { alunoId, valor, data } = req.body;
+    const { qtd_leite, data_registro, id_turma, id_usuario } = req.body;
     
-    const doacaoAtualizada = await doacaoModel.update(id, alunoId, valor, data);
+    const doacaoAtualizada = await doacaoModel.update(id, qtd_leite, data_registro, id_turma, id_usuario);
     
     if (!doacaoAtualizada) return res.status(404).json({ message: "Doação não encontrada para atualizar" });
     
@@ -73,7 +73,7 @@ const removeDoacao = async (req, res) => {
 module.exports = {
   getAllDoacoes,
   getDoacaoById,
-  getDoacoesByAluno,
+  getDoacoesByCurso,
   createDoacao,
   updateDoacao,
   removeDoacao

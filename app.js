@@ -11,11 +11,13 @@ const configRoutes = require("./src/routes/configRoutes");
 const doacaoRoutes = require("./src/routes/doacaoRoutes");
 const turmaRoutes = require("./src/routes/turmaRoutes");
 const usuarioRoutes = require("./src/routes/usuarioRoutes");
+const vilwsRoutes = require("./src/routes/vilwsRoutes");
 
 app.use("/api/configs", configRoutes);
 app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/turmas", turmaRoutes);
 app.use("/api/doacoes", doacaoRoutes);
+app.use("/api/vilws", vilwsRoutes);
 app.get("/", (req, res) => {
   res.send("está funcionando!");
 });

@@ -24,7 +24,7 @@ const getByCursoId = async (cursoId) => {
     `SELECT d.idd, d.qtd_leite, d.data_registro, d.id_turma, d.id_usuario
      FROM doacoes d
      JOIN turmas t ON d.id_turma = t.idt
-     WHERE t.id_curso = $1
+     WHERE t.nome_curso = $1
      ORDER BY d.data_registro`,
     [cursoId]
   );

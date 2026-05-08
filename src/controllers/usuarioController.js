@@ -24,8 +24,8 @@ const getUsuarioById = async (req, res) => {
 
 const createUsuario = async (req, res) => {
   try {
-    const { nome } = req.body;
-    const novoUsuario = await usuarioModel.create(nome);
+    const { nome, email } = req.body;
+    const novoUsuario = await usuarioModel.create(nome, email);
     return res.status(201).json(novoUsuario);
   } catch (error) {
     return res.status(500).json({ error: "Erro ao criar usuário", detalhe: error.message });
@@ -35,9 +35,9 @@ const createUsuario = async (req, res) => {
 const updateUsuario = async (req, res) => {
   try {
     const { id } = req.params;
-    const { nome } = req.body;
+    const { nome, email } = req.body;
     
-    const usuarioAtualizado = await usuarioModel.update(id, nome);
+    const usuarioAtualizado = await usuarioModel.update(id, nome, email);
     
     if (!usuarioAtualizado) return res.status(404).json({ message: "Usuário não encontrado para atualizar" });
     
